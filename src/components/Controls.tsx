@@ -1,16 +1,13 @@
-import type { Difficulty, GameMode } from '../types/game';
+import type { Difficulty, GamePhase } from '../types/game';
 
 interface ControlsProps {
   difficulty: Difficulty;
-  gameMode: GameMode;
-  isPlacingObstacles?: boolean;
-  obstaclesPlaced?: number;
+  gamePhase: GamePhase;
+  obstaclesPlaced: number;
   onDifficultyChange: (difficulty: Difficulty) => void;
-  onGameModeChange: (mode: GameMode) => void;
-  onNewGame: () => void;
-  onStartFreePlay: () => void;
-  onStartCustomObstacles: () => void;
-  onValidateAndStart?: () => void;
+  onStartGame: () => void;
+  onRandomLevel: () => void;
+  onCheckSolvable: () => void;
   onSolve: () => void;
   onReset: () => void;
   loading: boolean;
@@ -18,123 +15,43 @@ interface ControlsProps {
 
 export function Controls({
   difficulty,
-  gameMode,
-  isPlacingObstacles = false,
-  obstaclesPlaced = 0,
+  gamePhase,
+  obstaclesPlaced,
   onDifficultyChange,
-  onGameModeChange,
-  onNewGame,
-  onStartFreePlay,
-  onStartCustomObstacles,
-  onValidateAndStart,
+  onStartGame,
+  onRandomLevel,
+  onCheckSolvable,
   onSolve,
   onReset,
   loading,
 }: ControlsProps) {
+  const phaseText = gamePhase === 'placingObstacles'
+    ? `阶段 1/2: 放置黑色障碍块 (${obstaclesPlaced}/3)`
+    : gamePhase === 'playing'
+    ? '阶段 2/2: 填充剩余方块'
+    : '已完成';
+
   return (
     <div>
-      {/* 模式切换 */}
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
-        <button
-          onClick={() => onGameModeChange('normal')}
-          style={{
-            padding: '8px 16px',
-            border: 'none',
-            borderRadius: '6px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            background: gameMode === 'normal' ? '#667eea' : '#e0e0e0',
-            color: gameMode === 'normal' ? 'white' : '#666',
-            fontWeight: gameMode === 'normal' ? 'bold' : 'normal',
-            transition: 'all 0.2s',
-          }}
-        >
-          普通模式
-        </button>
-
-        <button
-          onClick={() => {
-            onGameModeChange('freePlay');
-            onStartFreePlay();
-          }}
-          style={{
-            padding: '8px 16px',
-            border: 'none',
-            borderRadius: '6px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            background: gameMode === 'freePlay' ? '#667eea' : '#e0e0e0',
-            color: gameMode === 'freePlay' ? 'white' : '#666',
-            fontWeight: gameMode === 'freePlay' ? 'bold' : 'normal',
-            transition: 'all 0.2s',
-          }}
-        >
-          自由模式
-        </button>
-
-        <button
-          onClick={() => {
-            onGameModeChange('customObstacles');
-            onStartCustomObstacles();
-          }}
-          style={{
-            padding: '8px 16px',
-            border: 'none',
-            borderRadius: '6px',
-            fontSize: '14px',
-            cursor: 'pointer',
-            background: gameMode === 'customObstacles' ? '#667eea' : '#e0e0e0',
-            color: gameMode === 'customObstacles' ? 'white' : '#666',
-            fontWeight: gameMode === 'customObstacles' ? 'bold' : 'normal',
-            transition: 'all 0.2s',
-          }}
-        >
-          自定义开局
-        </button>
-      </div>
-
-      {/* 自定义开局模式的进度提示 */}
-      {gameMode === 'customObstacles' && isPlacingObstacles && (
+      {/* 阶段提示 */}
+      {gamePhase !== 'completed' && (
         <div
           style={{
-            background: '#fff3cd',
-            border: '1px solid #ffc107',
+            background: gamePhase === 'placingObstacles' ? '#fff3cd' : '#d1ecf1',
+            border: gamePhase === 'placingObstacles' ? '1px solid #ffc107' : '1px solid #bee5eb',
             borderRadius: '6px',
-            padding: '12px',
+            padding: '10px 16px',
             marginBottom: '12px',
             fontSize: '14px',
-            color: '#856404',
+            color: gamePhase === 'placingObstacles' ? '#856404' : '#0c5460',
+            fontWeight: 'bold',
           }}
         >
-          <div style={{ fontWeight: 'bold', marginBottom: '4px' }}>
-            步骤 1/2: 放置障碍块
-          </div>
-          <div>
-            已放置: {obstaclesPlaced}/3 个黑色障碍块
-          </div>
-          {obstaclesPlaced === 3 && (
-            <button
-              onClick={onValidateAndStart}
-              disabled={loading}
-              style={{
-                marginTop: '8px',
-                padding: '6px 12px',
-                border: 'none',
-                borderRadius: '4px',
-                fontSize: '13px',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                background: loading ? '#ccc' : '#28a745',
-                color: 'white',
-                fontWeight: 'bold',
-              }}
-            >
-              {loading ? '验证中...' : '✓ 验证并开始游戏'}
-            </button>
-          )}
+          {phaseText}
         </div>
       )}
 
-      {/* 原有控制按钮 */}
+      {/* 控制按钮 */}
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
       <select
         value={difficulty}
@@ -154,7 +71,25 @@ export function Controls({
       </select>
 
       <button
-        onClick={onNewGame}
+        onClick={onStartGame}
+        disabled={loading}
+        style={{
+          padding: '8px 16px',
+          border: 'none',
+          borderRadius: '6px',
+          fontSize: '14px',
+          cursor: loading ? 'not-allowed' : 'pointer',
+          background: loading ? '#ccc' : '#28a745',
+          color: 'white',
+          fontWeight: 'bold',
+          transition: 'all 0.2s',
+        }}
+      >
+        开始游戏
+      </button>
+
+      <button
+        onClick={onRandomLevel}
         disabled={loading}
         style={{
           padding: '8px 16px',
@@ -167,7 +102,25 @@ export function Controls({
           transition: 'all 0.2s',
         }}
       >
-        新关卡
+        随机关卡
+      </button>
+
+      <button
+        onClick={onCheckSolvable}
+        disabled={loading || gamePhase === 'placingObstacles'}
+        style={{
+          padding: '8px 16px',
+          border: 'none',
+          borderRadius: '6px',
+          fontSize: '14px',
+          cursor: loading || gamePhase === 'placingObstacles' ? 'not-allowed' : 'pointer',
+          background: loading || gamePhase === 'placingObstacles' ? '#ccc' : '#17a2b8',
+          color: 'white',
+          transition: 'all 0.2s',
+        }}
+        title={gamePhase === 'placingObstacles' ? '请先完成障碍块放置' : '检测当前局面是否有解'}
+      >
+        检测有解
       </button>
 
       <button

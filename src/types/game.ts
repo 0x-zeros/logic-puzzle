@@ -47,7 +47,8 @@ export type SolveResult =
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
-export type GameMode = 'normal' | 'customObstacles' | 'freePlay';
+// 游戏阶段
+export type GamePhase = 'placingObstacles' | 'playing' | 'completed';
 
 export interface ValidationResult {
   has_unique_solution: boolean;

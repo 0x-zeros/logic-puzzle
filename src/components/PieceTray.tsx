@@ -1,9 +1,10 @@
-import { COLOR_MAP, type Piece } from '../types/game';
+import { COLOR_MAP, type Piece, type GamePhase } from '../types/game';
 
 interface PieceTrayProps {
   pieces: Piece[];
   usedPieces: boolean[];
   selectedPiece: Piece | null;
+  gamePhase: GamePhase;
   onSelectPiece: (piece: Piece) => void;
   onRotate: () => void;
   onCancel: () => void;
@@ -13,6 +14,7 @@ export function PieceTray({
   pieces,
   usedPieces,
   selectedPiece,
+  gamePhase,
   onSelectPiece,
   onRotate,
   onCancel,
@@ -43,21 +45,27 @@ export function PieceTray({
           const isUsed = usedPieces[index];
           const isSelected = selectedPiece?.id === piece.id;
 
+          // 阶段性禁用判断
+          const isDisabled =
+            (gamePhase === 'placingObstacles' && piece.id > 3) || // 阶段1只能选1,2,3
+            (gamePhase === 'playing' && piece.id <= 3) || // 阶段2不能选1,2,3（已锁定）
+            isUsed;
+
           return (
             <div
               key={piece.id}
-              onClick={() => !isUsed && onSelectPiece(piece)}
+              onClick={() => !isDisabled && onSelectPiece(piece)}
               style={{
                 background: 'white',
                 border: isSelected ? '2px solid #667eea' : '2px solid #ddd',
                 borderRadius: '6px',
                 padding: '12px',
-                cursor: isUsed ? 'not-allowed' : 'pointer',
+                cursor: isDisabled ? 'not-allowed' : 'pointer',
                 transition: 'all 0.2s',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                opacity: isUsed ? 0.4 : 1,
+                opacity: isDisabled ? 0.4 : 1,
                 backgroundColor: isSelected ? '#f0f4ff' : 'white',
               }}
             >

@@ -119,8 +119,8 @@ pub fn validate_custom_obstacles(
 
     let state = GameState {
         board: validation_board,
-        pieces: remaining_pieces,
-        used_pieces: vec![false; 8],
+        pieces: remaining_pieces.clone(),
+        used_pieces: vec![false; remaining_pieces.len()],
         obstacle_positions: Vec::new(),
     };
 
