@@ -7,7 +7,9 @@
       "Bash(icons/icon.png)",
       "Bash(python3:*)",
       "WebSearch",
-      "WebFetch(domain:stackoverflow.com)"
+      "WebFetch(domain:stackoverflow.com)",
+      "Bash(wasm-pack --version:*)",
+      "Bash(wasm-pack build:*)"
     ],
     "deny": [],
     "ask": []

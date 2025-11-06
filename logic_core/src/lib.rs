@@ -8,6 +8,10 @@ pub mod piece;
 pub mod solver;
 pub mod generator;
 
+// WASM绑定（仅在编译为WASM时包含）
+#[cfg(target_arch = "wasm32")]
+pub mod wasm;
+
 // 重新导出常用类型
 pub use types::{Board, Piece, GameState, Color, Difficulty, Solution, Placement, SolveResult};
 pub use solver::Solver;

@@ -3,7 +3,7 @@ import { Board } from './components/Board';
 import { PieceTray } from './components/PieceTray';
 import { Controls } from './components/Controls';
 import { useGameState } from './hooks/useGameState';
-import { useTauriCommand } from './hooks/useTauriCommand';
+import { useCommand } from './hooks/useCommand';
 import type { Difficulty, GamePhase, Piece as PieceType } from './types/game';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
   } = useGameState();
 
   const { loading, error, newLevel, solveLevel, checkPlacement, getPieces, validateCustomObstacles } =
-    useTauriCommand();
+    useCommand();
 
   // 初始化：加载所有方块数据
   useEffect(() => {
