@@ -1,0 +1,37 @@
+# Rust
+/target/
+Cargo.lock
+
+# Node.js
+node_modules/
+dist/
+.npm/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Tauri
+src-tauri/target/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build
+*.exe
+*.dmg
+*.app
+*.deb
+*.AppImage
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
