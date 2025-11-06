@@ -64,25 +64,3 @@ pub fn check_placement(
 pub fn get_pieces() -> Vec<Piece> {
     get_standard_pieces()
 }
-
-/// 保存关卡到文件
-#[tauri::command]
-pub fn save_level(state: GameState, path: String) -> Result<(), String> {
-    let json = serde_json::to_string_pretty(&state)
-        .map_err(|e| format!("Serialization error: {}", e))?;
-
-    std::fs::write(&path, json)
-        .map_err(|e| format!("File write error: {}", e))?;
-
-    Ok(())
-}
-
-/// 从文件加载关卡
-#[tauri::command]
-pub fn load_level(path: String) -> Result<GameState, String> {
-    let json = std::fs::read_to_string(&path)
-        .map_err(|e| format!("File read error: {}", e))?;
-
-    serde_json::from_str(&json)
-        .map_err(|e| format!("Deserialization error: {}", e))
-}
