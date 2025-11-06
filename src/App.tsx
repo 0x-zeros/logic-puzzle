@@ -22,7 +22,6 @@ function App() {
     resetGame,
     rotatePiece,
     removePiece,
-    checkWin,
   } = useGameState();
 
   const { loading, error, newLevel, solveLevel, checkPlacement, getPieces, validateCustomObstacles } =
@@ -192,7 +191,7 @@ function App() {
 
     if (result.no_solution) {
       setStatus('❌ 无解！这个拼图无法完成');
-    } else if (result.unique_solution) {
+    } else if (result.unique_solution && gameState) {
       setGameState({
         ...gameState,
         board: result.unique_solution.board,
@@ -200,7 +199,7 @@ function App() {
       });
       setGamePhase('completed');
       setStatus('✅ 已自动求解！');
-    } else if (result.multiple_solutions && result.multiple_solutions.length > 0) {
+    } else if (result.multiple_solutions && result.multiple_solutions.length > 0 && gameState) {
       setGameState({
         ...gameState,
         board: result.multiple_solutions[0].board,
@@ -262,7 +261,7 @@ function App() {
 
   // 处理方块选择
   const handleSelectPiece = useCallback(
-    (piece: typeof gameState.pieces[0]) => {
+    (piece: PieceType) => {
       selectPiece(piece);
       setStatus(`已选择方块 ${piece.id} (${piece.width}×${piece.height})`);
     },

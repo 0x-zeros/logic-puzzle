@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { COLOR_MAP, PIECE_ID_TO_COLOR, type Piece } from '../types/game';
+import { COLOR_MAP, PIECE_ID_TO_COLOR } from '../types/game';
 
 interface BoardProps {
   cells: number[];
-  pieces: Piece[];
+  pieces: unknown[];  // 保留参数但标记为unknown（为了兼容调用处）
   onCellClick: (index: number) => void;
   onCellRightClick?: (index: number) => void;
 }
 
-export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardProps) {
+export function Board({ cells, onCellClick, onCellRightClick }: BoardProps) {
   const [touchTimer, setTouchTimer] = useState<number | null>(null);
   const getCellStyle = (value: number): React.CSSProperties => {
     if (value < 0) {
