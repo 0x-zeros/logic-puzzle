@@ -11,7 +11,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![WASM](https://img.shields.io/badge/WebAssembly-Ready-654FF0?logo=webassembly)
 
-**[🎮 在线试玩](https://你的用户名.github.io/logic-puzzle/)** | **[📥 下载桌面版](https://github.com/你的用户名/logic-puzzle/releases)**
+**[🎮 在线试玩](https://0x-zeros.github.io/logic-puzzle/)** | **[📥 下载桌面版](https://github.com/0x-zeros/logic-puzzle/releases)**
 
 </div>
 
@@ -53,7 +53,7 @@
 
 **无需安装，直接在浏览器玩**：
 
-🔗 **https://你的用户名.github.io/logic-puzzle/**
+🔗 **https:/0x-zeros.github.io/logic-puzzle/**
 
 - ✅ PC浏览器
 - ✅ 手机浏览器（长按移除方块）
@@ -287,7 +287,7 @@ npm run tauri build        # 构建完整应用
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
 
-## 🙏 致谢
+##  致谢
 
 - 灵感来源：实体"逻辑拼图"玩具
 - 技术支持：[Tauri](https://tauri.app/), [React](https://react.dev/), [Rust](https://www.rust-lang.org/)
