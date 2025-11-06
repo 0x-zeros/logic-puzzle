@@ -10,7 +10,8 @@
       "WebFetch(domain:stackoverflow.com)",
       "Bash(wasm-pack --version:*)",
       "Bash(wasm-pack build:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
