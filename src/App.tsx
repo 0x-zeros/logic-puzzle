@@ -35,6 +35,23 @@ function App() {
     getPieces().then((pieces) => setAllPieces(pieces));
   }, [getPieces]);
 
+  // 自动开局：allPieces加载完成后，自动生成简单关卡
+  useEffect(() => {
+    const autoStart = async () => {
+      if (allPieces.length === 11 && !gameState) {
+        console.log('🎮 自动生成简单关卡...');
+        setStatus('正在生成简单关卡...');
+        const state = await newLevel('easy');
+        if (state) {
+          setGameState(state);
+          setGamePhase('playing');
+          setStatus('欢迎！已自动生成简单关卡，开始游戏吧 (手机可长按移除方块)');
+        }
+      }
+    };
+    autoStart();
+  }, [allPieces.length, gameState, newLevel, setGameState]);
+
   // 计算已放置的障碍数量（统计不同的障碍块ID，而不是格子数）
   const obstaclesPlaced = gameState
     ? new Set(gameState.board.cells.filter((c) => c < 0).map((c) => Math.abs(c))).size

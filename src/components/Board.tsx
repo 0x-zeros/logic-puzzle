@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { COLOR_MAP, PIECE_ID_TO_COLOR, type Piece } from '../types/game';
 
 interface BoardProps {
@@ -8,6 +9,7 @@ interface BoardProps {
 }
 
 export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardProps) {
+  const [touchTimer, setTouchTimer] = useState<number | null>(null);
   const getCellStyle = (value: number): React.CSSProperties => {
     if (value < 0) {
       // 障碍块（负数ID）
@@ -54,6 +56,28 @@ export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardPro
           onContextMenu={(e) => {
             e.preventDefault();
             onCellRightClick?.(index);
+          }}
+          onTouchStart={() => {
+            // 长按500ms触发移除
+            const timer = window.setTimeout(() => {
+              onCellRightClick?.(index);
+              // 震动反馈（手机）
+              if (navigator.vibrate) navigator.vibrate(50);
+            }, 500);
+            setTouchTimer(timer);
+          }}
+          onTouchEnd={() => {
+            if (touchTimer) {
+              clearTimeout(touchTimer);
+              setTouchTimer(null);
+            }
+          }}
+          onTouchMove={() => {
+            // 手指移动取消长按
+            if (touchTimer) {
+              clearTimeout(touchTimer);
+              setTouchTimer(null);
+            }
           }}
           style={{
             ...getCellStyle(value),
