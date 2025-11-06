@@ -78,3 +78,18 @@ export const COLOR_MAP: Record<Color, string> = {
   Gray1: '#7f8c8d',   // 深灰色
   Gray2: '#95a5a6',   // 浅灰色
 };
+
+// 方块ID到颜色的直接映射（用于Board组件快速查找）
+export const PIECE_ID_TO_COLOR: Record<number, Color> = {
+  1: 'Black1',
+  2: 'Black2',
+  3: 'Black3',
+  4: 'Blue1',
+  5: 'Blue2',
+  6: 'Red1',
+  7: 'Red2',
+  8: 'Yellow1',
+  9: 'Yellow2',
+  10: 'Gray1',
+  11: 'Gray2',
+};

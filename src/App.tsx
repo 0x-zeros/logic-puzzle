@@ -12,6 +12,7 @@ function App() {
   const [status, setStatus] = useState('选择游戏模式开始');
   const [isPlacingObstacles, setIsPlacingObstacles] = useState(false);
   const [obstaclesPlaced, setObstaclesPlaced] = useState(0);
+  const [allPieces, setAllPieces] = useState<PieceType[]>([]);
 
   const {
     gameState,
@@ -28,52 +29,44 @@ function App() {
   const { loading, error, newLevel, solveLevel, checkPlacement, getPieces, validateCustomObstacles } =
     useTauriCommand();
 
+  // 初始化：加载所有方块数据
+  useEffect(() => {
+    getPieces().then((pieces) => setAllPieces(pieces));
+  }, [getPieces]);
+
   // 处理自由模式
-  const handleStartFreePlay = useCallback(async () => {
+  const handleStartFreePlay = useCallback(() => {
     setGameMode('freePlay');
-    setStatus('正在加载方块...');
 
-    try {
-      const allPieces = await getPieces();
+    setGameState({
+      board: { cells: Array(64).fill(0) },
+      pieces: allPieces,
+      used_pieces: Array(11).fill(false),
+      obstacle_positions: [],
+    });
 
-      setGameState({
-        board: { cells: Array(64).fill(0) },
-        pieces: allPieces,
-        used_pieces: Array(11).fill(false),
-        obstacle_positions: [],
-      });
-
-      selectPiece(null);
-      setStatus('自由模式：随意放置方块，右键可移除');
-    } catch (err) {
-      setStatus('加载失败: ' + err);
-    }
-  }, [setGameState, selectPiece, getPieces]);
+    selectPiece(null);
+    setStatus('自由模式：随意放置方块，右键可移除');
+  }, [setGameState, selectPiece, allPieces]);
 
   // 处理自定义开局模式
-  const handleStartCustomObstacles = useCallback(async () => {
+  const handleStartCustomObstacles = useCallback(() => {
     setGameMode('customObstacles');
     setIsPlacingObstacles(true);
     setObstaclesPlaced(0);
-    setStatus('正在加载黑色障碍块...');
 
-    try {
-      const allPieces = await getPieces();
-      const blackPieces = allPieces.filter((p) => p.id <= 3);
+    const blackPieces = allPieces.filter((p) => p.id <= 3);
 
-      setGameState({
-        board: { cells: Array(64).fill(0) },
-        pieces: blackPieces,
-        used_pieces: [false, false, false],
-        obstacle_positions: [],
-      });
+    setGameState({
+      board: { cells: Array(64).fill(0) },
+      pieces: blackPieces,
+      used_pieces: [false, false, false],
+      obstacle_positions: [],
+    });
 
-      selectPiece(null);
-      setStatus('自定义开局 - 步骤1/2: 请依次放置3个黑色障碍块');
-    } catch (err) {
-      setStatus('加载失败: ' + err);
-    }
-  }, [setGameState, selectPiece, getPieces]);
+    selectPiece(null);
+    setStatus('自定义开局 - 步骤1/2: 请依次放置3个黑色障碍块');
+  }, [setGameState, selectPiece, allPieces]);
 
   // 自定义模式下的方块放置
   const handleCustomObstaclePlacement = useCallback(
@@ -123,7 +116,6 @@ function App() {
 
     if (result.has_unique_solution) {
       // 成功！标记障碍为-1，加载剩余8个方块
-      const allPieces = await getPieces();
       const newCells = gameState!.board.cells.map((cell) => ([1, 2, 3].includes(cell) ? -1 : cell));
       const remainingPieces = allPieces.filter((p) => p.id > 3);
 
@@ -142,7 +134,7 @@ function App() {
     } else {
       setStatus('⚠️ 当前障碍摆放存在多个解，建议重新摆放以获得唯一解');
     }
-  }, [obstaclesPlaced, gameState, validateCustomObstacles, setGameState, getPieces]);
+  }, [obstaclesPlaced, gameState, validateCustomObstacles, setGameState, allPieces]);
 
   // 处理右键移除
   const handleCellRightClick = useCallback(

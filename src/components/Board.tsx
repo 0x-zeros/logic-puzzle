@@ -1,4 +1,4 @@
-import { COLOR_MAP, type Piece } from '../types/game';
+import { COLOR_MAP, PIECE_ID_TO_COLOR, type Piece } from '../types/game';
 
 interface BoardProps {
   cells: number[];
@@ -16,10 +16,10 @@ export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardPro
       // 空格
       return { backgroundColor: '#fff' };
     } else {
-      // 已放置的方块
-      const piece = pieces.find((p) => p.id === value);
+      // 已放置的方块 - 使用ID直接映射颜色
+      const color = PIECE_ID_TO_COLOR[value];
       return {
-        backgroundColor: piece ? COLOR_MAP[piece.color] : '#ccc',
+        backgroundColor: color ? COLOR_MAP[color] : '#ccc',
         color: '#fff',
         fontWeight: 'bold',
       };
