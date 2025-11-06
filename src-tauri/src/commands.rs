@@ -1,7 +1,7 @@
 //! Tauri命令接口
 
 use logic_core::{
-    Board, Difficulty, GameState, Generator, Piece, SolveResult, Solver,
+    Board, Difficulty, GameState, Generator, Piece, Solution, SolveResult, Solver,
     piece::get_standard_pieces,
 };
 use serde::Serialize;
@@ -22,11 +22,53 @@ pub fn new_level(difficulty: String) -> Result<GameState, String> {
         .ok_or_else(|| "Failed to generate level".to_string())
 }
 
+/// 求解响应结构体
+#[derive(Debug, Serialize)]
+pub struct SolveResponse {
+    pub no_solution: bool,
+    pub unique_solution: Option<Solution>,
+    pub multiple_solutions: Option<Vec<Solution>>,
+}
+
 /// 求解当前关卡
 #[tauri::command]
-pub fn solve_level(state: GameState) -> Result<SolveResult, String> {
+pub fn solve_level(state: GameState) -> Result<SolveResponse, String> {
+    eprintln!("=== Rust solve_level ===");
+    eprintln!("board cells前10个: {:?}", &state.board.cells()[0..10]);
+    eprintln!("pieces数量: {}", state.pieces.len());
+    eprintln!("used_pieces数量: {}", state.used_pieces.len());
+    eprintln!("used_pieces: {:?}", state.used_pieces);
+
+    eprintln!("创建Solver...");
     let solver = Solver::new(1);
-    Ok(solver.solve(&state))
+
+    eprintln!("开始求解...");
+    let result = solver.solve(&state);
+
+    eprintln!("求解完成，结果类型: {}", match &result {
+        SolveResult::NoSolution => "NoSolution",
+        SolveResult::UniqueSolution(_) => "UniqueSolution",
+        SolveResult::MultipleSolutions(_) => "MultipleSolutions",
+    });
+
+    // 转换为结构体返回
+    Ok(match result {
+        SolveResult::NoSolution => SolveResponse {
+            no_solution: true,
+            unique_solution: None,
+            multiple_solutions: None,
+        },
+        SolveResult::UniqueSolution(sol) => SolveResponse {
+            no_solution: false,
+            unique_solution: Some(sol),
+            multiple_solutions: None,
+        },
+        SolveResult::MultipleSolutions(sols) => SolveResponse {
+            no_solution: false,
+            unique_solution: None,
+            multiple_solutions: Some(sols),
+        },
+    })
 }
 
 /// 检查是否可以放置方块
@@ -89,16 +131,21 @@ pub fn validate_custom_obstacles(
 
     let board = Board::from_array(cells);
 
-    // 找出障碍块ID（棋盘上的1、2、3）
+    eprintln!("=== validate_custom_obstacles ===");
+    eprintln!("board cells前10个: {:?}", &board.cells()[0..10]);
+
+    // 找出障碍块ID（棋盘上的负数 -1, -2, -3）
     let mut obstacle_ids: Vec<u8> = Vec::new();
     for &cell in board.cells() {
-        if cell > 0 && cell <= 3 {
-            let id = cell as u8;
+        if cell < 0 && cell >= -3 {
+            let id = cell.abs() as u8;
             if !obstacle_ids.contains(&id) {
                 obstacle_ids.push(id);
             }
         }
     }
+
+    eprintln!("找到障碍块ID: {:?}", obstacle_ids);
 
     // 获取剩余方块（排除障碍块）
     let remaining_pieces: Vec<Piece> = get_standard_pieces()
@@ -106,16 +153,10 @@ pub fn validate_custom_obstacles(
         .filter(|p| !obstacle_ids.contains(&p.id))
         .collect();
 
-    // 将障碍块标记为负数（保留ID信息）
-    let mut validation_board = board.clone();
-    for row in 0..8 {
-        for col in 0..8 {
-            let cell = validation_board.get(row, col);
-            if cell > 0 && cell <= 3 {
-                validation_board.set(row, col, -cell);
-            }
-        }
-    }
+    eprintln!("剩余方块数量: {}", remaining_pieces.len());
+
+    // 障碍块已经是负数，直接使用
+    let validation_board = board.clone();
 
     let state = GameState {
         board: validation_board,

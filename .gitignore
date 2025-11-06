@@ -1,37 +1,231 @@
-# Rust
+# ============================================
+# Rust 编译产物
+# ============================================
+# Cargo 编译输出目录（所有 target 目录）
 /target/
-Cargo.lock
+target/
+**/target/
 
-# Node.js
+# Cargo 锁文件（对于库项目通常不提交，但应用项目可以提交）
+# Cargo.lock  # 已注释，因为这是应用项目，需要锁定依赖版本
+
+# Rust 编译中间文件
+*.pdb
+*.rlib
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+
+# Rust 调试信息
+*.dSYM/
+*.dwarf
+
+# ============================================
+# Node.js / npm
+# ============================================
 node_modules/
-dist/
 .npm/
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
+.pnpm-store/
+.yarn/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
+.yarn/install-state.gz
 
-# Tauri
+# 包管理器锁文件（根据需要选择保留哪个）
+# package-lock.json  # npm
+# pnpm-lock.yaml     # pnpm
+# yarn.lock          # yarn
+
+# ============================================
+# Vite 构建产物
+# ============================================
+dist/
+dist-ssr/
+*.local
+
+# Vite 缓存
+.vite/
+vite.config.*.timestamp-*
+
+# ============================================
+# TypeScript
+# ============================================
+*.tsbuildinfo
+.tsbuildinfo
+
+# ============================================
+# Tauri 相关
+# ============================================
+# Tauri 编译输出（已经在 target/ 中，但明确列出）
 src-tauri/target/
+src-tauri/gen/
 
-# IDE
+# Tauri 构建产物
+src-tauri/WixTools/
+
+# ============================================
+# 构建产物和发布文件
+# ============================================
+# 可执行文件
+*.exe
+*.out
+*.app
+*.dmg
+*.deb
+*.rpm
+*.AppImage
+*.snap
+*.msi
+*.pkg
+
+# 压缩包
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+
+# ============================================
+# 日志文件
+# ============================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log.*
+
+# ============================================
+# 环境变量和配置
+# ============================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# ============================================
+# IDE 和编辑器
+# ============================================
+# VSCode
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# JetBrains IDEs
 .idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Vim
 *.swp
 *.swo
 *~
+.*.sw[a-z]
+*.un~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ============================================
+# 操作系统
+# ============================================
+# macOS
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
-# Build
-*.exe
-*.dmg
-*.app
-*.deb
-*.AppImage
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
 
-# Logs
-*.log
-npm-debug.log*
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
 
-# Environment
-.env
-.env.local
+# ============================================
+# 测试和覆盖率
+# ============================================
+coverage/
+*.lcov
+.nyc_output/
+.coverage/
+htmlcov/
+.pytest_cache/
+.hypothesis/
+
+# ============================================
+# 临时文件
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+.cache/
+tmp/
+temp/
+
+# ============================================
+# 其他
+# ============================================
+# 调试文件
+*.pdb
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# 性能分析
+*.prof
+*.profdata
+
+# 文档生成
+docs/_build/
+site/

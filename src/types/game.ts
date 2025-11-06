@@ -40,10 +40,11 @@ export interface Solution {
   placements: Placement[];
 }
 
-export type SolveResult =
-  | { NoSolution: null }
-  | { UniqueSolution: Solution }
-  | { MultipleSolutions: Solution[] };
+export interface SolveResponse {
+  no_solution: boolean;
+  unique_solution: Solution | null;
+  multiple_solutions: Solution[] | null;
+}
 
 export type Difficulty = 'easy' | 'medium' | 'hard';
 

@@ -148,35 +148,46 @@ function App() {
 
   // 处理求解
   const handleSolve = useCallback(async () => {
+    console.log('=== handleSolve 开始 ===');
+
     if (!gameState) {
       setStatus('请先开始新游戏');
       return;
     }
 
+    console.log('当前gameState:', gameState);
+    console.log('pieces数量:', gameState.pieces.length);
+    console.log('used_pieces:', gameState.used_pieces);
+
     setStatus('求解中...');
+
+    console.log('调用solveLevel...');
     const result = await solveLevel(gameState);
+    console.log('solveLevel返回:', result);
 
     if (!result) {
       setStatus('求解失败');
       return;
     }
 
-    if ('NoSolution' in result) {
-      setStatus('无解！这个拼图无法完成');
-    } else if ('UniqueSolution' in result) {
+    if (result.no_solution) {
+      setStatus('❌ 无解！这个拼图无法完成');
+    } else if (result.unique_solution) {
       setGameState({
         ...gameState,
-        board: result.UniqueSolution.board,
+        board: result.unique_solution.board,
         used_pieces: new Array(gameState.pieces.length).fill(true),
       });
-      setStatus('已自动求解！');
-    } else if ('MultipleSolutions' in result) {
+      setGamePhase('completed');
+      setStatus('✅ 已自动求解！');
+    } else if (result.multiple_solutions && result.multiple_solutions.length > 0) {
       setGameState({
         ...gameState,
-        board: result.MultipleSolutions[0].board,
+        board: result.multiple_solutions[0].board,
         used_pieces: new Array(gameState.pieces.length).fill(true),
       });
-      setStatus('已找到一个解（存在多个解）');
+      setGamePhase('completed');
+      setStatus('✅ 已找到一个解（存在多个解）');
     }
   }, [gameState, solveLevel, setGameState]);
 

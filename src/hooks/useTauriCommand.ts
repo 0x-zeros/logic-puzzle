@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { useState, useCallback } from 'react';
-import type { GameState, SolveResult, Piece, Difficulty, ValidationResult } from '../types/game';
+import type { GameState, SolveResponse, Piece, Difficulty, ValidationResult } from '../types/game';
 
 export function useTauriCommand() {
   const [loading, setLoading] = useState(false);
@@ -21,17 +21,27 @@ export function useTauriCommand() {
     }
   }, []);
 
-  const solveLevel = useCallback(async (state: GameState): Promise<SolveResult | null> => {
+  const solveLevel = useCallback(async (state: GameState): Promise<SolveResponse | null> => {
+    console.log('📤 solveLevel: 准备发送请求');
+    console.log('📤 state.pieces.length:', state.pieces.length);
+    console.log('📤 state.used_pieces:', state.used_pieces);
+    console.log('📤 state.board.cells前10个:', state.board.cells.slice(0, 10));
+
     setLoading(true);
     setError(null);
+
     try {
-      const result = await invoke<SolveResult>('solve_level', { state });
+      console.log('🔄 调用invoke...');
+      const result = await invoke<SolveResponse>('solve_level', { state });
+      console.log('📥 收到响应:', result);
       return result;
     } catch (err) {
+      console.error('❌ solveLevel错误:', err);
       const message = err instanceof Error ? err.message : String(err);
       setError(message);
       return null;
     } finally {
+      console.log('✅ solveLevel完成（finally块）');
       setLoading(false);
     }
   }, []);
