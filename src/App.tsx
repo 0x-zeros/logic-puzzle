@@ -4,6 +4,7 @@ import { PieceTray } from './components/PieceTray';
 import { Controls } from './components/Controls';
 import { useGameState } from './hooks/useGameState';
 import { useCommand } from './hooks/useCommand';
+import { useDeviceType } from './hooks/useDeviceType';
 import type { Difficulty, GamePhase, Piece as PieceType } from './types/game';
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
 
   const { loading, error, newLevel, solveLevel, checkPlacement, getPieces, validateCustomObstacles } =
     useCommand();
+
+  const { isMobile } = useDeviceType();
 
   // 初始化：加载所有方块数据
   useEffect(() => {
@@ -327,46 +330,77 @@ function App() {
           {gameState ? (
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 300px',
-                gap: '24px',
+                display: 'flex',
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: isMobile ? '12px' : '24px',
                 margin: '20px 0',
               }}
             >
-              {/* 左侧：棋盘 + 状态提示 */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {/* PC端：左侧棋盘+状态 */}
+              {!isMobile && (
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <Board
+                    cells={gameState.board.cells}
+                    pieces={gameState.pieces}
+                    onCellClick={handleCellClick}
+                    onCellRightClick={handleCellRightClick}
+                  />
+                  {/* 状态提示 */}
+                  <div
+                    style={{
+                      padding: '12px 16px',
+                      background: '#f8f9fa',
+                      borderRadius: '8px',
+                      border: '1px solid #dee2e6',
+                      color: '#495057',
+                      fontSize: '14px',
+                      textAlign: 'center',
+                    }}
+                  >
+                    {status}
+                  </div>
+                </div>
+              )}
+
+              {/* 移动端：棋盘 */}
+              {isMobile && (
                 <Board
                   cells={gameState.board.cells}
                   pieces={gameState.pieces}
                   onCellClick={handleCellClick}
                   onCellRightClick={handleCellRightClick}
                 />
-                {/* 状态提示 */}
+              )}
+
+              {/* 移动端：状态提示（紧贴棋盘下方） */}
+              {isMobile && (
                 <div
                   style={{
-                    padding: '12px 16px',
+                    padding: '10px 12px',
                     background: '#f8f9fa',
-                    borderRadius: '8px',
+                    borderRadius: '6px',
                     border: '1px solid #dee2e6',
                     color: '#495057',
-                    fontSize: '14px',
+                    fontSize: '13px',
                     textAlign: 'center',
                   }}
                 >
                   {status}
                 </div>
-              </div>
+              )}
 
-              {/* 右侧：方块列表 */}
-              <PieceTray
-                pieces={gameState.pieces}
-                usedPieces={gameState.used_pieces}
-                selectedPiece={selectedPiece}
-                gamePhase={gamePhase}
-                onSelectPiece={handleSelectPiece}
-                onRotate={handleRotate}
-                onCancel={handleCancel}
-              />
+              {/* 方块列表（PC右侧，移动端底部） */}
+              <div style={{ width: isMobile ? '100%' : '300px' }}>
+                <PieceTray
+                  pieces={gameState.pieces}
+                  usedPieces={gameState.used_pieces}
+                  selectedPiece={selectedPiece}
+                  gamePhase={gamePhase}
+                  onSelectPiece={handleSelectPiece}
+                  onRotate={handleRotate}
+                  onCancel={handleCancel}
+                />
+              </div>
             </div>
           ) : (
             <div
