@@ -11,7 +11,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![WASM](https://img.shields.io/badge/WebAssembly-Ready-654FF0?logo=webassembly)
 
-**[🎮 在线试玩](https://0x-zeros.github.io/logic-puzzle/)** | **[📥 下载桌面版](https://github.com/0x-zeros/logic-puzzle/releases)**
+**[🎮 在线试玩](https://0x-zeros.github.io/logic-puzzle/)** 
 
 </div>
 
