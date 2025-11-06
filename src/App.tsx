@@ -87,8 +87,8 @@ function App() {
       );
 
       if (canPlace) {
-        updateBoard(row, col, selectedPiece);
-        if (checkWin()) {
+        const isWin = updateBoard(row, col, selectedPiece);
+        if (isWin) {
           setStatus('恭喜！你完成了拼图！');
         } else {
           setStatus('方块已放置');
@@ -97,7 +97,7 @@ function App() {
         setStatus('不能在这里放置方块');
       }
     },
-    [gameState, selectedPiece, checkPlacement, updateBoard, checkWin]
+    [gameState, selectedPiece, checkPlacement, updateBoard]
   );
 
   // 处理方块选择

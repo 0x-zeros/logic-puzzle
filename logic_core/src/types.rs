@@ -280,23 +280,22 @@ impl GameState {
 }
 
 /// 难度等级
+/// 注意：难度只是给玩家的参考标签，所有关卡都使用相同的3个黑色障碍块（1x1, 1x2, 1x3）
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Difficulty {
-    /// 简单（障碍是小块）
+    /// 简单 - 玩家参考难度
     Easy,
-    /// 中等（障碍是中等块）
+    /// 中等 - 玩家参考难度
     Medium,
-    /// 困难（障碍是大块）
+    /// 困难 - 玩家参考难度
     Hard,
 }
 
 impl Difficulty {
-    /// 根据难度获取可选的障碍方块ID
+    /// 获取障碍方块ID
+    /// 所有难度都使用相同的3个黑色块：1x1(id=1), 1x2(id=2), 1x3(id=3)
     pub fn get_obstacle_piece_ids(&self) -> Vec<u8> {
-        match self {
-            Difficulty::Easy => vec![1, 2, 3], // 1x1, 1x2, 1x3
-            Difficulty::Medium => vec![4, 5, 6, 7], // 1x4, 1x5, 2x2, 2x3
-            Difficulty::Hard => vec![8, 9, 10, 11], // 2x4, 2x5, 3x3, 3x4
-        }
+        // 忽略难度参数，总是返回黑色块1、2、3
+        vec![1, 2, 3]
     }
 }

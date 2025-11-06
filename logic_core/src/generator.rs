@@ -73,13 +73,12 @@ impl Generator {
                 .collect();
 
             // 2. 随机放置这些障碍
-            let board = match self.random_place_obstacles(&selected_ids) {
-                Some(b) => b,
+            let (board, obstacle_positions) = match self.random_place_obstacles(&selected_ids) {
+                Some(result) => result,
                 None => continue,
             };
 
             // 3. 创建游戏状态（移除障碍piece）
-            let obstacle_positions = self.extract_obstacle_positions(&board, &selected_ids);
             all_pieces.retain(|p| !selected_ids.contains(&p.id));
 
             let mut state = GameState::new(all_pieces);
@@ -152,7 +151,6 @@ impl Generator {
                     piece.rotate();
                 }
                 board.place(&piece, placement.row, placement.col);
-                board.set(placement.row, placement.col, -1); // 标记为障碍
                 obstacle_positions.push((placement.row, placement.col, piece.id));
 
                 // 将所有占用的格子都标记为-1
@@ -178,9 +176,11 @@ impl Generator {
     }
 
     /// 随机放置障碍方块
-    fn random_place_obstacles(&self, piece_ids: &[u8]) -> Option<Board> {
+    /// 返回：(棋盘, 障碍位置列表)
+    fn random_place_obstacles(&self, piece_ids: &[u8]) -> Option<(Board, Vec<(usize, usize, u8)>)> {
         let mut rng = rand::rng();
         let mut board = Board::new();
+        let mut positions = Vec::new();
 
         for &piece_id in piece_ids {
             let mut piece = get_standard_pieces()[(piece_id - 1) as usize].clone();
@@ -201,6 +201,9 @@ impl Generator {
                 if board.can_place(&piece, row, col) {
                     board.place(&piece, row, col);
 
+                    // 记录障碍位置（在标记为-1之前）
+                    positions.push((row, col, piece_id));
+
                     // 标记为障碍
                     for r in row..row + piece.height {
                         for c in col..col + piece.width {
@@ -219,29 +222,7 @@ impl Generator {
             }
         }
 
-        Some(board)
-    }
-
-    /// 从棋盘中提取障碍位置
-    fn extract_obstacle_positions(&self, board: &Board, piece_ids: &[u8]) -> Vec<(usize, usize, u8)> {
-        let mut positions = Vec::new();
-
-        for &piece_id in piece_ids {
-            // 找到这个piece在棋盘上的第一个格子
-            for row in 0..8 {
-                for col in 0..8 {
-                    if board.get(row, col) == piece_id as i8 {
-                        positions.push((row, col, piece_id));
-                        break;
-                    }
-                }
-                if positions.iter().any(|(_, _, id)| *id == piece_id) {
-                    break;
-                }
-            }
-        }
-
-        positions
+        Some((board, positions))
     }
 
     /// 验证关卡有唯一解

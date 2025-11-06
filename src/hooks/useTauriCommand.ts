@@ -45,9 +45,10 @@ export function useTauriCommand() {
       rotated: boolean
     ): Promise<boolean> => {
       try {
+        // Rust端使用蛇形命名，需要转换
         return await invoke<boolean>('check_placement', {
-          boardCells,
-          pieceId,
+          board_cells: boardCells,
+          piece_id: pieceId,
           row,
           col,
           rotated,

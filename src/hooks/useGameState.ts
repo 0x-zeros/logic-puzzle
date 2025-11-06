@@ -5,7 +5,9 @@ export function useGameState() {
   const [gameState, setGameState] = useState<GameState | null>(null);
   const [selectedPiece, setSelectedPiece] = useState<Piece | null>(null);
 
-  const updateBoard = useCallback((row: number, col: number, piece: Piece) => {
+  const updateBoard = useCallback((row: number, col: number, piece: Piece): boolean => {
+    let isWin = false;
+
     setGameState((prev) => {
       if (!prev) return null;
 
@@ -26,6 +28,9 @@ export function useGameState() {
         newUsedPieces[pieceIndex] = true;
       }
 
+      // 基于新棋盘判断是否胜利
+      isWin = newCells.every((cell) => cell !== 0);
+
       return {
         ...prev,
         board: { cells: newCells },
@@ -35,6 +40,8 @@ export function useGameState() {
 
     // 清除选择
     setSelectedPiece(null);
+
+    return isWin;
   }, []);
 
   const resetGame = useCallback(() => {

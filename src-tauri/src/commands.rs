@@ -4,21 +4,6 @@ use logic_core::{
     Board, Difficulty, GameState, Generator, Piece, SolveResult, Solver,
     piece::get_standard_pieces,
 };
-use serde::{Deserialize, Serialize};
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct NewLevelRequest {
-    pub difficulty: String,
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-pub struct PlacementRequest {
-    pub board: Vec<i8>,
-    pub piece_id: u8,
-    pub row: usize,
-    pub col: usize,
-    pub rotated: bool,
-}
 
 /// 生成新关卡
 #[tauri::command]
