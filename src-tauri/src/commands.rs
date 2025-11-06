@@ -106,13 +106,13 @@ pub fn validate_custom_obstacles(
         .filter(|p| !obstacle_ids.contains(&p.id))
         .collect();
 
-    // 将障碍块标记为-1
+    // 将障碍块标记为负数（保留ID信息）
     let mut validation_board = board.clone();
     for row in 0..8 {
         for col in 0..8 {
             let cell = validation_board.get(row, col);
             if cell > 0 && cell <= 3 {
-                validation_board.set(row, col, -1);
+                validation_board.set(row, col, -cell);
             }
         }
     }

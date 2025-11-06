@@ -5,7 +5,9 @@
       "Bash(cargo test:*)",
       "Bash(cargo build:*)",
       "Bash(icons/icon.png)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "WebSearch",
+      "WebFetch(domain:stackoverflow.com)"
     ],
     "deny": [],
     "ask": []

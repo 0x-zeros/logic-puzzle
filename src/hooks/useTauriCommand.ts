@@ -45,16 +45,28 @@ export function useTauriCommand() {
       rotated: boolean
     ): Promise<boolean> => {
       try {
-        // Rust端使用蛇形命名，需要转换
-        return await invoke<boolean>('check_placement', {
-          board_cells: boardCells,
-          piece_id: pieceId,
+        console.log('🔍 checkPlacement 调用参数:', {
+          boardCells: boardCells.slice(0, 10) + '...',
+          boardCellsLength: boardCells.length,
+          pieceId,
           row,
           col,
           rotated,
         });
+
+        // Tauri自动将Rust的snake_case转换为camelCase
+        const result = await invoke<boolean>('check_placement', {
+          boardCells,
+          pieceId,
+          row,
+          col,
+          rotated,
+        });
+
+        console.log('✅ checkPlacement 返回:', result);
+        return result;
       } catch (err) {
-        console.error('Check placement error:', err);
+        console.error('❌ Check placement error:', err);
         return false;
       }
     },
@@ -75,8 +87,9 @@ export function useTauriCommand() {
       setLoading(true);
       setError(null);
       try {
+        // Tauri自动将camelCase转换为snake_case
         const result = await invoke<ValidationResult>('validate_custom_obstacles', {
-          board_cells: boardCells,
+          boardCells,
         });
         return result;
       } catch (err) {

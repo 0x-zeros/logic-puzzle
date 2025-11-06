@@ -153,10 +153,10 @@ impl Generator {
                 board.place(&piece, placement.row, placement.col);
                 obstacle_positions.push((placement.row, placement.col, piece.id));
 
-                // 将所有占用的格子都标记为-1
+                // 将所有占用的格子都标记为负数ID（保留障碍块ID信息）
                 for r in placement.row..placement.row + piece.height {
                     for c in placement.col..placement.col + piece.width {
-                        board.set(r, c, -1);
+                        board.set(r, c, -(piece.id as i8));
                     }
                 }
             }
@@ -201,13 +201,13 @@ impl Generator {
                 if board.can_place(&piece, row, col) {
                     board.place(&piece, row, col);
 
-                    // 记录障碍位置（在标记为-1之前）
+                    // 记录障碍位置
                     positions.push((row, col, piece_id));
 
-                    // 标记为障碍
+                    // 标记为障碍（使用负数ID保留信息）
                     for r in row..row + piece.height {
                         for c in col..col + piece.width {
-                            board.set(r, c, -1);
+                            board.set(r, c, -(piece_id as i8));
                         }
                     }
 
@@ -270,7 +270,7 @@ mod tests {
             assert_eq!(s.pieces.len(), 8);
 
             // 验证棋盘上有障碍
-            let obstacle_count = s.board.cells().iter().filter(|&&c| c == -1).count();
+            let obstacle_count = s.board.cells().iter().filter(|&&c| c < 0).count();
             assert!(obstacle_count > 0);
         }
     }
@@ -284,7 +284,7 @@ mod tests {
 
             if let Some(s) = state {
                 assert_eq!(s.pieces.len(), 8);
-                let obstacle_count = s.board.cells().iter().filter(|&&c| c == -1).count();
+                let obstacle_count = s.board.cells().iter().filter(|&&c| c < 0).count();
                 assert!(obstacle_count > 0);
             }
         }

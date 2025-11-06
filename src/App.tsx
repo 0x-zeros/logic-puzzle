@@ -115,8 +115,10 @@ function App() {
     }
 
     if (result.has_unique_solution) {
-      // 成功！标记障碍为-1，加载剩余8个方块
-      const newCells = gameState!.board.cells.map((cell) => ([1, 2, 3].includes(cell) ? -1 : cell));
+      // 成功！标记障碍为负数ID，加载剩余8个方块
+      const newCells = gameState!.board.cells.map((cell) =>
+        [1, 2, 3].includes(cell) ? -cell : cell
+      );
       const remainingPieces = allPieces.filter((p) => p.id > 3);
 
       setGameState({
@@ -204,18 +206,33 @@ function App() {
   // 处理格子点击
   const handleCellClick = useCallback(
     async (index: number) => {
-      if (!gameState || !selectedPiece) return;
+      console.log('=== handleCellClick ===');
+      console.log('index:', index);
+      console.log('gameState:', gameState);
+      console.log('selectedPiece:', selectedPiece);
+
+      if (!gameState || !selectedPiece) {
+        console.log('❌ 无gameState或selectedPiece');
+        return;
+      }
 
       const row = Math.floor(index / 8);
       const col = index % 8;
 
+      console.log('放置位置:', { row, col });
+      console.log('方块:', { id: selectedPiece.id, width: selectedPiece.width, height: selectedPiece.height, rotated: selectedPiece.rotated });
+
       // 自定义开局模式：放置障碍块
       if (gameMode === 'customObstacles' && isPlacingObstacles) {
+        console.log('使用自定义障碍放置逻辑');
         handleCustomObstaclePlacement(row, col);
         return;
       }
 
       // 普通模式和自由模式：正常放置
+      console.log('调用checkPlacement...');
+      console.log('board.cells:', gameState.board.cells);
+
       const canPlace = await checkPlacement(
         gameState.board.cells,
         selectedPiece.id,
@@ -223,6 +240,8 @@ function App() {
         col,
         selectedPiece.rotated
       );
+
+      console.log('canPlace结果:', canPlace);
 
       if (canPlace) {
         const isWin = updateBoard(row, col, selectedPiece);

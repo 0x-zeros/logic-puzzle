@@ -9,9 +9,15 @@ interface BoardProps {
 
 export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardProps) {
   const getCellStyle = (value: number): React.CSSProperties => {
-    if (value === -1) {
-      // 障碍
-      return { backgroundColor: '#2c3e50' };
+    if (value < 0) {
+      // 障碍块（负数ID）
+      const pieceId = Math.abs(value);
+      const color = PIECE_ID_TO_COLOR[pieceId];
+      return {
+        backgroundColor: color ? COLOR_MAP[color] : '#2c3e50',
+        color: '#fff',
+        fontWeight: 'bold',
+      };
     } else if (value === 0) {
       // 空格
       return { backgroundColor: '#fff' };
@@ -66,7 +72,7 @@ export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardPro
             e.currentTarget.style.filter = 'brightness(1)';
           }}
         >
-          {value > 0 && (
+          {value !== 0 && (
             <span
               style={{
                 position: 'absolute',
@@ -79,7 +85,7 @@ export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardPro
                 lineHeight: '1',
               }}
             >
-              {value}
+              {Math.abs(value)}
             </span>
           )}
         </div>

@@ -18,7 +18,7 @@ export interface Piece {
 }
 
 export interface Board {
-  cells: number[]; // 64个格子：-1=障碍，0=空，1-11=piece_id
+  cells: number[]; // 64个格子：负数(-1,-2,-3)=障碍块ID，0=空，正数(1-11)=已放置方块ID
 }
 
 export interface GameState {

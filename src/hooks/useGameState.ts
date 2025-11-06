@@ -49,7 +49,7 @@ export function useGameState() {
       if (!prev) return null;
 
       // 重置棋盘（保留障碍）
-      const newCells = prev.board.cells.map((cell) => (cell === -1 ? -1 : 0));
+      const newCells = prev.board.cells.map((cell) => (cell < 0 ? cell : 0));
 
       // 重置所有方块
       const newPieces = prev.pieces.map((piece) => ({
