@@ -12,6 +12,7 @@ fn main() {
             solve_level,
             check_placement,
             get_pieces,
+            validate_custom_obstacles,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

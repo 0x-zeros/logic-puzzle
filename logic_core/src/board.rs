@@ -76,7 +76,7 @@ mod tests {
     #[test]
     fn test_can_place() {
         let mut board = Board::new();
-        let piece = Piece::new(1, 2, 3, Color::Black);
+        let piece = Piece::new(1, 2, 3, Color::Black1);
 
         // 在空棋盘上应该可以放置
         assert!(board.can_place(&piece, 0, 0));
@@ -94,7 +94,7 @@ mod tests {
     #[test]
     fn test_place_and_remove() {
         let mut board = Board::new();
-        let piece = Piece::new(1, 2, 3, Color::Black);
+        let piece = Piece::new(1, 2, 3, Color::Black1);
 
         board.place(&piece, 0, 0);
 

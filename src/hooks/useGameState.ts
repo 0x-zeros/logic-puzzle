@@ -86,6 +86,47 @@ export function useGameState() {
     setSelectedPiece(piece ? { ...piece } : null);
   }, []);
 
+  const removePiece = useCallback((cellIndex: number) => {
+    setGameState((prev) => {
+      if (!prev) return null;
+
+      const pieceId = prev.board.cells[cellIndex];
+      if (pieceId <= 0) return prev; // 空格或障碍，无需移除
+
+      // 清除该方块占用的所有格子
+      const newCells = prev.board.cells.map((cell) => (cell === pieceId ? 0 : cell));
+
+      // 标记为未使用
+      const pieceIndex = prev.pieces.findIndex((p) => p.id === pieceId);
+      const newUsedPieces = [...prev.used_pieces];
+      if (pieceIndex !== -1) {
+        newUsedPieces[pieceIndex] = false;
+
+        // 重置方块朝向
+        const newPieces = [...prev.pieces];
+        newPieces[pieceIndex] = {
+          ...newPieces[pieceIndex],
+          width: newPieces[pieceIndex].original_width,
+          height: newPieces[pieceIndex].original_height,
+          rotated: false,
+        };
+
+        return {
+          ...prev,
+          board: { cells: newCells },
+          pieces: newPieces,
+          used_pieces: newUsedPieces,
+        };
+      }
+
+      return {
+        ...prev,
+        board: { cells: newCells },
+        used_pieces: newUsedPieces,
+      };
+    });
+  }, []);
+
   const checkWin = useCallback(() => {
     if (!gameState) return false;
     return gameState.board.cells.every((cell) => cell !== 0);
@@ -99,6 +140,7 @@ export function useGameState() {
     updateBoard,
     resetGame,
     rotatePiece,
+    removePiece,
     checkWin,
   };
 }

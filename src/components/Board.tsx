@@ -4,9 +4,10 @@ interface BoardProps {
   cells: number[];
   pieces: Piece[];
   onCellClick: (index: number) => void;
+  onCellRightClick?: (index: number) => void;
 }
 
-export function Board({ cells, pieces, onCellClick }: BoardProps) {
+export function Board({ cells, pieces, onCellClick, onCellRightClick }: BoardProps) {
   const getCellStyle = (value: number): React.CSSProperties => {
     if (value === -1) {
       // 障碍
@@ -44,6 +45,10 @@ export function Board({ cells, pieces, onCellClick }: BoardProps) {
         <div
           key={index}
           onClick={() => onCellClick(index)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            onCellRightClick?.(index);
+          }}
           style={{
             ...getCellStyle(value),
             display: 'flex',
@@ -52,6 +57,7 @@ export function Board({ cells, pieces, onCellClick }: BoardProps) {
             fontSize: '12px',
             cursor: 'pointer',
             transition: 'all 0.2s',
+            position: 'relative',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.filter = 'brightness(1.1)';
@@ -60,7 +66,22 @@ export function Board({ cells, pieces, onCellClick }: BoardProps) {
             e.currentTarget.style.filter = 'brightness(1)';
           }}
         >
-          {value > 0 && value}
+          {value > 0 && (
+            <span
+              style={{
+                position: 'absolute',
+                top: '2px',
+                left: '2px',
+                fontSize: '10px',
+                fontWeight: 'bold',
+                color: 'rgba(255, 255, 255, 0.95)',
+                textShadow: '0 0 3px rgba(0, 0, 0, 0.8), 0 1px 2px rgba(0, 0, 0, 0.5)',
+                lineHeight: '1',
+              }}
+            >
+              {value}
+            </span>
+          )}
         </div>
       ))}
     </div>

@@ -3,25 +3,57 @@
 use serde::{Deserialize, Serialize};
 use crate::{BOARD_SIZE, TOTAL_CELLS};
 
-/// 方块颜色
+/// 方块颜色（每个方块独立颜色，同色系内有深浅区分）
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Color {
-    Black,  // 黑色 (1x1, 1x2, 1x3)
-    Blue,   // 蓝色 (1x4, 1x5)
-    Red,    // 红色 (2x2, 2x3)
-    Yellow, // 黄色 (2x4, 2x5)
-    Gray,   // 灰色 (3x3, 3x4)
+    // 黑色系 (1×1, 1×2, 1×3) - 从深到浅
+    Black1,  // 深墨黑 - 1×1
+    Black2,  // 标准黑 - 1×2
+    Black3,  // 浅炭黑 - 1×3
+
+    // 蓝色系 (1×4, 1×5)
+    Blue1,   // 深海蓝 - 1×4
+    Blue2,   // 天空蓝 - 1×5
+
+    // 红色系 (2×2, 2×3)
+    Red1,    // 深玫红 - 2×2
+    Red2,    // 番茄红 - 2×3
+
+    // 黄色系 (2×4, 2×5)
+    Yellow1, // 金橙黄 - 2×4
+    Yellow2, // 明黄色 - 2×5
+
+    // 灰色系 (3×3, 3×4)
+    Gray1,   // 深灰色 - 3×3
+    Gray2,   // 浅灰色 - 3×4
 }
 
 impl Color {
     /// 获取颜色的CSS表示
     pub fn to_css(&self) -> &'static str {
         match self {
-            Color::Black => "#2c3e50",
-            Color::Blue => "#3498db",
-            Color::Red => "#e74c3c",
-            Color::Yellow => "#f39c12",
-            Color::Gray => "#95a5a6",
+            Color::Black1 => "#1a252f",  // 深墨黑
+            Color::Black2 => "#2c3e50",  // 标准黑
+            Color::Black3 => "#34495e",  // 浅炭黑
+            Color::Blue1 => "#2980b9",   // 深海蓝
+            Color::Blue2 => "#3498db",   // 天空蓝
+            Color::Red1 => "#c0392b",    // 深玫红
+            Color::Red2 => "#e74c3c",    // 番茄红
+            Color::Yellow1 => "#d68910", // 金橙黄
+            Color::Yellow2 => "#f39c12", // 明黄色
+            Color::Gray1 => "#7f8c8d",   // 深灰色
+            Color::Gray2 => "#95a5a6",   // 浅灰色
+        }
+    }
+
+    /// 获取色系名称
+    pub fn family(&self) -> &'static str {
+        match self {
+            Color::Black1 | Color::Black2 | Color::Black3 => "黑色系",
+            Color::Blue1 | Color::Blue2 => "蓝色系",
+            Color::Red1 | Color::Red2 => "红色系",
+            Color::Yellow1 | Color::Yellow2 => "黄色系",
+            Color::Gray1 | Color::Gray2 => "灰色系",
         }
     }
 }

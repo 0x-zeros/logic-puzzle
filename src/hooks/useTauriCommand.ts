@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { useState, useCallback } from 'react';
-import type { GameState, SolveResult, Piece, Difficulty } from '../types/game';
+import type { GameState, SolveResult, Piece, Difficulty, ValidationResult } from '../types/game';
 
 export function useTauriCommand() {
   const [loading, setLoading] = useState(false);
@@ -70,6 +70,26 @@ export function useTauriCommand() {
     }
   }, []);
 
+  const validateCustomObstacles = useCallback(
+    async (boardCells: number[]): Promise<ValidationResult | null> => {
+      setLoading(true);
+      setError(null);
+      try {
+        const result = await invoke<ValidationResult>('validate_custom_obstacles', {
+          board_cells: boardCells,
+        });
+        return result;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        setError(message);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
+
   return {
     loading,
     error,
@@ -77,5 +97,6 @@ export function useTauriCommand() {
     solveLevel,
     checkPlacement,
     getPieces,
+    validateCustomObstacles,
   };
 }

@@ -2,29 +2,29 @@
 
 use crate::types::{Color, Piece};
 
-/// 获取标准的11个方块
+/// 获取标准的11个方块（每个方块有独立颜色）
 pub fn get_standard_pieces() -> Vec<Piece> {
     vec![
-        // 黑色方块 (1-3)
-        Piece::new(1, 1, 1, Color::Black),  // 1x1
-        Piece::new(2, 1, 2, Color::Black),  // 1x2
-        Piece::new(3, 1, 3, Color::Black),  // 1x3
+        // 黑色系 (1-3) - 深→中→浅
+        Piece::new(1, 1, 1, Color::Black1),  // 1×1 深墨黑
+        Piece::new(2, 1, 2, Color::Black2),  // 1×2 标准黑
+        Piece::new(3, 1, 3, Color::Black3),  // 1×3 浅炭黑
 
-        // 蓝色方块 (4-5)
-        Piece::new(4, 1, 4, Color::Blue),   // 1x4
-        Piece::new(5, 1, 5, Color::Blue),   // 1x5
+        // 蓝色系 (4-5) - 深→浅
+        Piece::new(4, 1, 4, Color::Blue1),   // 1×4 深海蓝
+        Piece::new(5, 1, 5, Color::Blue2),   // 1×5 天空蓝
 
-        // 红色方块 (6-7)
-        Piece::new(6, 2, 2, Color::Red),    // 2x2
-        Piece::new(7, 2, 3, Color::Red),    // 2x3
+        // 红色系 (6-7) - 深→浅
+        Piece::new(6, 2, 2, Color::Red1),    // 2×2 深玫红
+        Piece::new(7, 2, 3, Color::Red2),    // 2×3 番茄红
 
-        // 黄色方块 (8-9)
-        Piece::new(8, 2, 4, Color::Yellow), // 2x4
-        Piece::new(9, 2, 5, Color::Yellow), // 2x5
+        // 黄色系 (8-9) - 深→浅
+        Piece::new(8, 2, 4, Color::Yellow1), // 2×4 金橙黄
+        Piece::new(9, 2, 5, Color::Yellow2), // 2×5 明黄色
 
-        // 灰色方块 (10-11)
-        Piece::new(10, 3, 3, Color::Gray),  // 3x3
-        Piece::new(11, 3, 4, Color::Gray),  // 3x4
+        // 灰色系 (10-11) - 深→浅
+        Piece::new(10, 3, 3, Color::Gray1),  // 3×3 深灰色
+        Piece::new(11, 3, 4, Color::Gray2),  // 3×4 浅灰色
     ]
 }
 
@@ -75,31 +75,43 @@ mod tests {
     fn test_piece_colors() {
         let pieces = get_standard_pieces();
 
-        // 黑色: 1-3
-        assert_eq!(pieces[0].color, Color::Black);
-        assert_eq!(pieces[1].color, Color::Black);
-        assert_eq!(pieces[2].color, Color::Black);
+        // 黑色系: 1-3 (每个独立颜色)
+        assert_eq!(pieces[0].color, Color::Black1);
+        assert_eq!(pieces[1].color, Color::Black2);
+        assert_eq!(pieces[2].color, Color::Black3);
 
-        // 蓝色: 4-5
-        assert_eq!(pieces[3].color, Color::Blue);
-        assert_eq!(pieces[4].color, Color::Blue);
+        // 蓝色系: 4-5
+        assert_eq!(pieces[3].color, Color::Blue1);
+        assert_eq!(pieces[4].color, Color::Blue2);
 
-        // 红色: 6-7
-        assert_eq!(pieces[5].color, Color::Red);
-        assert_eq!(pieces[6].color, Color::Red);
+        // 红色系: 6-7
+        assert_eq!(pieces[5].color, Color::Red1);
+        assert_eq!(pieces[6].color, Color::Red2);
 
-        // 黄色: 8-9
-        assert_eq!(pieces[7].color, Color::Yellow);
-        assert_eq!(pieces[8].color, Color::Yellow);
+        // 黄色系: 8-9
+        assert_eq!(pieces[7].color, Color::Yellow1);
+        assert_eq!(pieces[8].color, Color::Yellow2);
 
-        // 灰色: 10-11
-        assert_eq!(pieces[9].color, Color::Gray);
-        assert_eq!(pieces[10].color, Color::Gray);
+        // 灰色系: 10-11
+        assert_eq!(pieces[9].color, Color::Gray1);
+        assert_eq!(pieces[10].color, Color::Gray2);
+    }
+
+    #[test]
+    fn test_color_families() {
+        let pieces = get_standard_pieces();
+
+        // 验证色系分组
+        assert_eq!(pieces[0].color.family(), "黑色系");
+        assert_eq!(pieces[1].color.family(), "黑色系");
+        assert_eq!(pieces[2].color.family(), "黑色系");
+        assert_eq!(pieces[3].color.family(), "蓝色系");
+        assert_eq!(pieces[4].color.family(), "蓝色系");
     }
 
     #[test]
     fn test_piece_rotation() {
-        let mut piece = Piece::new(1, 2, 3, Color::Black);
+        let mut piece = Piece::new(1, 2, 3, Color::Black1);
         assert_eq!(piece.width, 2);
         assert_eq!(piece.height, 3);
         assert!(!piece.rotated);
