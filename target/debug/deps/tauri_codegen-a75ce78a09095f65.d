@@ -1,0 +1,11 @@
+/Users/zero/dev/game/logic-puzzle/target/debug/deps/tauri_codegen-a75ce78a09095f65.d: /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/lib.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/context.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/embedded_assets.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/mod.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/blake3_reference.rs
+
+/Users/zero/dev/game/logic-puzzle/target/debug/deps/libtauri_codegen-a75ce78a09095f65.rlib: /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/lib.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/context.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/embedded_assets.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/mod.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/blake3_reference.rs
+
+/Users/zero/dev/game/logic-puzzle/target/debug/deps/libtauri_codegen-a75ce78a09095f65.rmeta: /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/lib.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/context.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/embedded_assets.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/mod.rs /Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/blake3_reference.rs
+
+/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/lib.rs:
+/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/context.rs:
+/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/embedded_assets.rs:
+/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/mod.rs:
+/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-codegen-1.4.6/src/vendor/blake3_reference.rs:
