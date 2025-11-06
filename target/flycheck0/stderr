@@ -1,0 +1,656 @@
+   0.175594792s  INFO prepare_target{force=false package_id=logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri) target="logic-puzzle-app"}: cargo::core::compiler::fingerprint: stale: missing "/Users/zero/dev/game/logic-puzzle/src-tauri/capabilities"
+   0.182966125s  INFO prepare_target{force=false package_id=logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri) target="logic-puzzle-app"}: cargo::core::compiler::fingerprint: fingerprint error for logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri)/Check { test: false }/TargetInner { name: "logic-puzzle-app", doc: true, ..: with_path("/Users/zero/dev/game/logic-puzzle/src-tauri/src/main.rs", Edition2024) }
+   0.182985667s  INFO prepare_target{force=false package_id=logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri) target="logic-puzzle-app"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/logic-puzzle-app-6d93f245b2456aee/bin-logic-puzzle-app`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   7: cargo::ops::cargo_compile::compile_ws
+   8: cargo::ops::cargo_compile::compile_with_exec
+   9: cargo::ops::cargo_compile::compile
+  10: cargo::commands::check::exec
+  11: <cargo::cli::Exec>::exec
+  12: cargo::main
+  13: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  14: std::rt::lang_start::<()>::{closure#0}
+  15: std::rt::lang_start_internal
+  16: _main
+   0.186690625s  INFO prepare_target{force=false package_id=logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri) target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint dirty for logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri)/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/zero/dev/game/logic-puzzle/src-tauri/build.rs", Edition2024) }
+   0.186701333s  INFO prepare_target{force=false package_id=logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri) target="build-script-build"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(StaleItem(MissingFile("/Users/zero/dev/game/logic-puzzle/src-tauri/capabilities")))
+   0.194187917s  INFO prepare_target{force=false package_id=logic_core v0.1.0 (/Users/zero/dev/game/logic-puzzle/logic_core) target="logic_core"}: cargo::core::compiler::fingerprint: fingerprint error for logic_core v0.1.0 (/Users/zero/dev/game/logic-puzzle/logic_core)/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("logic_core", ["lib"], "/Users/zero/dev/game/logic-puzzle/logic_core/src/lib.rs", Edition2024) }
+   0.194208875s  INFO prepare_target{force=false package_id=logic_core v0.1.0 (/Users/zero/dev/game/logic-puzzle/logic_core) target="logic_core"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/logic_core-d94602684d7508f6/lib-logic_core`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.195187958s  INFO prepare_target{force=false package_id=tauri v2.9.2 target="tauri"}: cargo::core::compiler::fingerprint: fingerprint error for tauri v2.9.2/Check { test: false }/TargetInner { ..: lib_target("tauri", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-2.9.2/src/lib.rs", Edition2021) }
+   0.195197458s  INFO prepare_target{force=false package_id=tauri v2.9.2 target="tauri"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/tauri-aa4d423b14e374fb/lib-tauri`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.196955875s  INFO prepare_target{force=false package_id=muda v0.17.1 target="muda"}: cargo::core::compiler::fingerprint: fingerprint error for muda v0.17.1/Check { test: false }/TargetInner { ..: lib_target("muda", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/muda-0.17.1/src/lib.rs", Edition2021) }
+   0.196963375s  INFO prepare_target{force=false package_id=muda v0.17.1 target="muda"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/muda-9f5c4cab7970a3ad/lib-muda`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.197829917s  INFO prepare_target{force=false package_id=objc2-app-kit v0.3.2 target="objc2_app_kit"}: cargo::core::compiler::fingerprint: fingerprint error for objc2-app-kit v0.3.2/Check { test: false }/TargetInner { ..: lib_target("objc2_app_kit", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-app-kit-0.3.2/src/lib.rs", Edition2021) }
+   0.197836333s  INFO prepare_target{force=false package_id=objc2-app-kit v0.3.2 target="objc2_app_kit"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/objc2-app-kit-32ee28a6d394349b/lib-objc2_app_kit`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.199369917s  INFO prepare_target{force=false package_id=objc2-cloud-kit v0.3.2 target="objc2_cloud_kit"}: cargo::core::compiler::fingerprint: fingerprint error for objc2-cloud-kit v0.3.2/Check { test: false }/TargetInner { ..: lib_target("objc2_cloud_kit", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-cloud-kit-0.3.2/src/lib.rs", Edition2021) }
+   0.199381750s  INFO prepare_target{force=false package_id=objc2-cloud-kit v0.3.2 target="objc2_cloud_kit"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/objc2-cloud-kit-7a461a5e052c0152/lib-objc2_cloud_kit`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.199673583s  INFO prepare_target{force=false package_id=objc2-core-data v0.3.2 target="objc2_core_data"}: cargo::core::compiler::fingerprint: fingerprint error for objc2-core-data v0.3.2/Check { test: false }/TargetInner { ..: lib_target("objc2_core_data", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-data-0.3.2/src/lib.rs", Edition2021) }
+   0.199680292s  INFO prepare_target{force=false package_id=objc2-core-data v0.3.2 target="objc2_core_data"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/objc2-core-data-ebd4e6897e50e1a6/lib-objc2_core_data`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.199891375s  INFO prepare_target{force=false package_id=objc2-core-image v0.3.2 target="objc2_core_image"}: cargo::core::compiler::fingerprint: fingerprint error for objc2-core-image v0.3.2/Check { test: false }/TargetInner { ..: lib_target("objc2_core_image", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-core-image-0.3.2/src/lib.rs", Edition2021) }
+   0.199896583s  INFO prepare_target{force=false package_id=objc2-core-image v0.3.2 target="objc2_core_image"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/objc2-core-image-7368682709c0edc0/lib-objc2_core_image`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.200088125s  INFO prepare_target{force=false package_id=objc2-quartz-core v0.3.2 target="objc2_quartz_core"}: cargo::core::compiler::fingerprint: fingerprint error for objc2-quartz-core v0.3.2/Check { test: false }/TargetInner { ..: lib_target("objc2_quartz_core", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-quartz-core-0.3.2/src/lib.rs", Edition2021) }
+   0.200091500s  INFO prepare_target{force=false package_id=objc2-quartz-core v0.3.2 target="objc2_quartz_core"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/objc2-quartz-core-61a45c7bcc13b983/lib-objc2_quartz_core`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.200584417s  INFO prepare_target{force=false package_id=objc2-web-kit v0.3.2 target="objc2_web_kit"}: cargo::core::compiler::fingerprint: fingerprint error for objc2-web-kit v0.3.2/Check { test: false }/TargetInner { ..: lib_target("objc2_web_kit", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/objc2-web-kit-0.3.2/src/lib.rs", Edition2021) }
+   0.200588458s  INFO prepare_target{force=false package_id=objc2-web-kit v0.3.2 target="objc2_web_kit"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/objc2-web-kit-a5dbd89d9e90709d/lib-objc2_web_kit`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.201835875s  INFO prepare_target{force=false package_id=tauri-runtime v2.9.1 target="tauri_runtime"}: cargo::core::compiler::fingerprint: fingerprint error for tauri-runtime v2.9.1/Check { test: false }/TargetInner { ..: lib_target("tauri_runtime", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-2.9.1/src/lib.rs", Edition2021) }
+   0.201842167s  INFO prepare_target{force=false package_id=tauri-runtime v2.9.1 target="tauri_runtime"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/tauri-runtime-78279b4617b38d25/lib-tauri_runtime`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.203860042s  INFO prepare_target{force=false package_id=tauri-runtime-wry v2.9.1 target="tauri_runtime_wry"}: cargo::core::compiler::fingerprint: fingerprint error for tauri-runtime-wry v2.9.1/Check { test: false }/TargetInner { ..: lib_target("tauri_runtime_wry", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-runtime-wry-2.9.1/src/lib.rs", Edition2021) }
+   0.203871833s  INFO prepare_target{force=false package_id=tauri-runtime-wry v2.9.1 target="tauri_runtime_wry"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/tauri-runtime-wry-f2f31624400b0bea/lib-tauri_runtime_wry`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.204544208s  INFO prepare_target{force=false package_id=tao v0.34.5 target="tao"}: cargo::core::compiler::fingerprint: fingerprint error for tao v0.34.5/Check { test: false }/TargetInner { ..: lib_target("tao", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tao-0.34.5/src/lib.rs", Edition2021) }
+   0.204550042s  INFO prepare_target{force=false package_id=tao v0.34.5 target="tao"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/tao-2888230265c8d594/lib-tao`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.205398625s  INFO prepare_target{force=false package_id=wry v0.53.5 target="wry"}: cargo::core::compiler::fingerprint: fingerprint error for wry v0.53.5/Check { test: false }/TargetInner { ..: lib_target("wry", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wry-0.53.5/src/lib.rs", Edition2021) }
+   0.205404625s  INFO prepare_target{force=false package_id=wry v0.53.5 target="wry"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/wry-7606a801d78f1904/lib-wry`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.206140875s  INFO prepare_target{force=false package_id=window-vibrancy v0.6.0 target="window_vibrancy"}: cargo::core::compiler::fingerprint: fingerprint error for window-vibrancy v0.6.0/Check { test: false }/TargetInner { ..: lib_target("window_vibrancy", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/window-vibrancy-0.6.0/src/lib.rs", Edition2021) }
+   0.206151750s  INFO prepare_target{force=false package_id=window-vibrancy v0.6.0 target="window_vibrancy"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/window-vibrancy-6f7b97eeb55026ec/lib-window_vibrancy`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.206418208s  INFO prepare_target{force=false package_id=tauri-plugin-dialog v2.4.2 target="tauri_plugin_dialog"}: cargo::core::compiler::fingerprint: fingerprint error for tauri-plugin-dialog v2.4.2/Check { test: false }/TargetInner { ..: lib_target("tauri_plugin_dialog", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-dialog-2.4.2/src/lib.rs", Edition2021) }
+   0.206424875s  INFO prepare_target{force=false package_id=tauri-plugin-dialog v2.4.2 target="tauri_plugin_dialog"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/tauri-plugin-dialog-f0f570e4f3062e31/lib-tauri_plugin_dialog`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.207168333s  INFO prepare_target{force=false package_id=rfd v0.15.4 target="rfd"}: cargo::core::compiler::fingerprint: fingerprint error for rfd v0.15.4/Check { test: false }/TargetInner { ..: lib_target("rfd", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rfd-0.15.4/src/lib.rs", Edition2021) }
+   0.207174833s  INFO prepare_target{force=false package_id=rfd v0.15.4 target="rfd"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/rfd-445edcb826676041/lib-rfd`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.207620625s  INFO prepare_target{force=false package_id=tauri-plugin-fs v2.4.4 target="tauri_plugin_fs"}: cargo::core::compiler::fingerprint: fingerprint error for tauri-plugin-fs v2.4.4/Check { test: false }/TargetInner { ..: lib_target("tauri_plugin_fs", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-fs-2.4.4/src/lib.rs", Edition2021) }
+   0.207627250s  INFO prepare_target{force=false package_id=tauri-plugin-fs v2.4.4 target="tauri_plugin_fs"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/tauri-plugin-fs-21cc7692056c26d3/lib-tauri_plugin_fs`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.208303375s  INFO prepare_target{force=false package_id=tauri-plugin-shell v2.3.3 target="tauri_plugin_shell"}: cargo::core::compiler::fingerprint: fingerprint error for tauri-plugin-shell v2.3.3/Check { test: false }/TargetInner { ..: lib_target("tauri_plugin_shell", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tauri-plugin-shell-2.3.3/src/lib.rs", Edition2021) }
+   0.208309208s  INFO prepare_target{force=false package_id=tauri-plugin-shell v2.3.3 target="tauri_plugin_shell"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/tauri-plugin-shell-753c6667b3dde3c0/lib-tauri_plugin_shell`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.209060708s  INFO prepare_target{force=false package_id=shared_child v1.1.1 target="shared_child"}: cargo::core::compiler::fingerprint: fingerprint error for shared_child v1.1.1/Check { test: false }/TargetInner { ..: lib_target("shared_child", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/shared_child-1.1.1/src/lib.rs", Edition2021) }
+   0.209066125s  INFO prepare_target{force=false package_id=shared_child v1.1.1 target="shared_child"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/shared_child-530c7b6e705d0e10/lib-shared_child`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.209190875s  INFO prepare_target{force=false package_id=sigchld v0.2.4 target="sigchld"}: cargo::core::compiler::fingerprint: fingerprint error for sigchld v0.2.4/Check { test: false }/TargetInner { ..: lib_target("sigchld", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/sigchld-0.2.4/src/lib.rs", Edition2021) }
+   0.209196208s  INFO prepare_target{force=false package_id=sigchld v0.2.4 target="sigchld"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/sigchld-c988bb85bc033399/lib-sigchld`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.209345292s  INFO prepare_target{force=false package_id=signal-hook v0.3.18 target="signal_hook"}: cargo::core::compiler::fingerprint: fingerprint error for signal-hook v0.3.18/Check { test: false }/TargetInner { ..: lib_target("signal_hook", ["lib"], "/Users/zero/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-0.3.18/src/lib.rs", Edition2018) }
+   0.209348875s  INFO prepare_target{force=false package_id=signal-hook v0.3.18 target="signal_hook"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/signal-hook-5812002226c5756b/lib-signal_hook`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.209625000s  INFO prepare_target{force=false package_id=logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri) target="logic-puzzle-app"}: cargo::core::compiler::fingerprint: fingerprint error for logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri)/Check { test: true }/TargetInner { name: "logic-puzzle-app", doc: true, ..: with_path("/Users/zero/dev/game/logic-puzzle/src-tauri/src/main.rs", Edition2024) }
+   0.209631375s  INFO prepare_target{force=false package_id=logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri) target="logic-puzzle-app"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/logic-puzzle-app-2a6c9a7b1a794cb1/test-bin-logic-puzzle-app`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   7: cargo::ops::cargo_compile::compile_ws
+   8: cargo::ops::cargo_compile::compile_with_exec
+   9: cargo::ops::cargo_compile::compile
+  10: cargo::commands::check::exec
+  11: <cargo::cli::Exec>::exec
+  12: cargo::main
+  13: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  14: std::rt::lang_start::<()>::{closure#0}
+  15: std::rt::lang_start_internal
+  16: _main
+   0.210526625s  INFO prepare_target{force=false package_id=logic_core v0.1.0 (/Users/zero/dev/game/logic-puzzle/logic_core) target="logic_core"}: cargo::core::compiler::fingerprint: fingerprint error for logic_core v0.1.0 (/Users/zero/dev/game/logic-puzzle/logic_core)/Check { test: true }/TargetInner { name_inferred: true, ..: lib_target("logic_core", ["lib"], "/Users/zero/dev/game/logic-puzzle/logic_core/src/lib.rs", Edition2024) }
+   0.210536417s  INFO prepare_target{force=false package_id=logic_core v0.1.0 (/Users/zero/dev/game/logic-puzzle/logic_core) target="logic_core"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/zero/dev/game/logic-puzzle/target/debug/.fingerprint/logic_core-46fb0e30590e6380/test-lib-logic_core`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   7: cargo::ops::cargo_compile::compile_ws
+   8: cargo::ops::cargo_compile::compile_with_exec
+   9: cargo::ops::cargo_compile::compile
+  10: cargo::commands::check::exec
+  11: <cargo::cli::Exec>::exec
+  12: cargo::main
+  13: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  14: std::rt::lang_start::<()>::{closure#0}
+  15: std::rt::lang_start_internal
+  16: _main
+    Checking objc2-cloud-kit v0.3.2
+    Checking objc2-core-image v0.3.2
+    Checking objc2-quartz-core v0.3.2
+    Checking objc2-core-data v0.3.2
+    Checking signal-hook v0.3.18
+    Checking logic_core v0.1.0 (/Users/zero/dev/game/logic-puzzle/logic_core)
+   Compiling logic-puzzle-app v0.1.0 (/Users/zero/dev/game/logic-puzzle/src-tauri)
+    Checking sigchld v0.2.4
+    Checking shared_child v1.1.1
+    Checking objc2-app-kit v0.3.2
+error: could not compile `logic_core` (lib) due to 2 previous errors; 8 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `logic_core` (lib test) due to 2 previous errors; 8 warnings emitted
+    Checking objc2-web-kit v0.3.2
+    Checking tao v0.34.5
+    Checking window-vibrancy v0.6.0
+    Checking muda v0.17.1
+    Checking rfd v0.15.4
+    Checking wry v0.53.5
+    Checking tauri-runtime v2.9.1
+    Checking tauri-runtime-wry v2.9.1
+    Checking tauri v2.9.2
+    Checking tauri-plugin-fs v2.4.4
+    Checking tauri-plugin-shell v2.3.3
+    Checking tauri-plugin-dialog v2.4.2

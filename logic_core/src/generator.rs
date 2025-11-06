@@ -4,8 +4,8 @@ use crate::types::{Board, Difficulty, GameState, Piece, Solution, SolveResult};
 use crate::piece::get_standard_pieces;
 use crate::solver::Solver;
 use crate::OBSTACLE_COUNT;
-use rand::seq::SliceRandom;
-use rand::Rng;
+use rand::prelude::*;
+use rand::seq::{IndexedRandom, SliceRandom};
 
 /// 关卡生成器
 pub struct Generator {
@@ -31,6 +31,7 @@ impl Generator {
 
     /// 方式一：从完整解反推生成关卡
     pub fn generate_from_solution(&self, difficulty: Difficulty) -> Option<GameState> {
+        let mut _rng = rand::rng();
         for _ in 0..self.max_retries {
             // 1. 生成一个完整解
             let solution = self.generate_complete_solution()?;
@@ -55,7 +56,7 @@ impl Generator {
 
     /// 方式二：先放障碍再求解
     pub fn generate_from_obstacles(&self, difficulty: Difficulty) -> Option<GameState> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
 
         for _ in 0..self.max_retries {
             // 1. 随机选择3个piece ID作为障碍
@@ -96,7 +97,7 @@ impl Generator {
 
     /// 生成一个完整解（填满整个8x8棋盘）
     fn generate_complete_solution(&self) -> Option<Solution> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let mut pieces = get_standard_pieces();
 
         // 随机打乱方块顺序，增加多样性
@@ -104,7 +105,7 @@ impl Generator {
 
         // 随机决定某些方块是否旋转
         for piece in &mut pieces {
-            if rng.gen_bool(0.3) && piece.width != piece.height {
+            if rng.random_bool(0.3) && piece.width != piece.height {
                 piece.rotate();
             }
         }
@@ -121,7 +122,7 @@ impl Generator {
 
     /// 从完整解中选择障碍方块
     fn select_obstacle_pieces(&self, solution: &Solution, difficulty: Difficulty) -> Vec<u8> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let candidate_ids = difficulty.get_obstacle_piece_ids();
 
         // 从解中找出符合难度的方块
@@ -178,14 +179,14 @@ impl Generator {
 
     /// 随机放置障碍方块
     fn random_place_obstacles(&self, piece_ids: &[u8]) -> Option<Board> {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let mut board = Board::new();
 
         for &piece_id in piece_ids {
             let mut piece = get_standard_pieces()[(piece_id - 1) as usize].clone();
 
             // 随机决定是否旋转
-            if rng.gen_bool(0.5) && piece.width != piece.height {
+            if rng.random_bool(0.5) && piece.width != piece.height {
                 piece.rotate();
             }
 
@@ -194,8 +195,8 @@ impl Generator {
             let mut placed = false;
 
             while attempts < 50 && !placed {
-                let row = rng.gen_range(0..8);
-                let col = rng.gen_range(0..8);
+                let row = rng.random_range(0..8);
+                let col = rng.random_range(0..8);
 
                 if board.can_place(&piece, row, col) {
                     board.place(&piece, row, col);

@@ -4,7 +4,8 @@
       "Bash(cargo check:*)",
       "Bash(cargo test:*)",
       "Bash(cargo build:*)",
-      "Bash(icons/icon.png)"
+      "Bash(icons/icon.png)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []
