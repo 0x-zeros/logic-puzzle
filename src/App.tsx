@@ -32,12 +32,22 @@ function App() {
     getPieces().then((pieces) => setAllPieces(pieces));
   }, [getPieces]);
 
-  // 计算已放置的障碍数量
-  const obstaclesPlaced = gameState?.board.cells.filter((c) => c < 0).length || 0;
+  // 计算已放置的障碍数量（统计不同的障碍块ID，而不是格子数）
+  const obstaclesPlaced = gameState
+    ? new Set(gameState.board.cells.filter((c) => c < 0).map((c) => Math.abs(c))).size
+    : 0;
 
   // 阶段自动切换：当3个障碍都放置完成后，自动进入游戏阶段
   useEffect(() => {
+    console.log('🔍 阶段切换检查:', {
+      obstaclesPlaced,
+      gamePhase,
+      hasGameState: !!gameState,
+      allPiecesLength: allPieces.length,
+    });
+
     if (obstaclesPlaced === 3 && gamePhase === 'placingObstacles' && gameState) {
+      console.log('✅ 切换到阶段2');
       setGamePhase('playing');
 
       // 加载剩余8个方块（4-11）
@@ -199,11 +209,13 @@ function App() {
       );
 
       if (canPlace) {
-        const isWin = updateBoard(row, col, selectedPiece);
+        // 阶段1放置的是障碍块（负数），阶段2放置的是普通块（正数）
+        const isObstacle = gamePhase === 'placingObstacles';
+        const isWin = updateBoard(row, col, selectedPiece, isObstacle);
 
         if (gamePhase === 'placingObstacles') {
-          const newPlaced = obstaclesPlaced + 1;
-          setStatus(`已放置 ${newPlaced}/3 个障碍块`);
+          // 障碍计数会在下次渲染时更新（通过obstaclesPlaced计算）
+          setStatus(`已放置障碍块 ${selectedPiece.id}`);
         } else if (isWin) {
           setGamePhase('completed');
           setStatus('🎉 恭喜！你完成了拼图！');

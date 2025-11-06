@@ -5,22 +5,23 @@ export function useGameState() {
   const [gameState, setGameState] = useState<GameState | null>(null);
   const [selectedPiece, setSelectedPiece] = useState<Piece | null>(null);
 
-  const updateBoard = useCallback((row: number, col: number, piece: Piece): boolean => {
-    let isWin = false;
+  const updateBoard = useCallback(
+    (row: number, col: number, piece: Piece, isObstacle: boolean = false): boolean => {
+      let isWin = false;
 
-    setGameState((prev) => {
-      if (!prev) return null;
+      setGameState((prev) => {
+        if (!prev) return null;
 
-      const newCells = [...prev.board.cells];
-      const pieceIndex = prev.pieces.findIndex((p) => p.id === piece.id);
+        const newCells = [...prev.board.cells];
+        const pieceIndex = prev.pieces.findIndex((p) => p.id === piece.id);
 
-      // 放置方块
-      for (let r = 0; r < piece.height; r++) {
-        for (let c = 0; c < piece.width; c++) {
-          const index = (row + r) * 8 + (col + c);
-          newCells[index] = piece.id;
+        // 放置方块（障碍块用负数，普通方块用正数）
+        for (let r = 0; r < piece.height; r++) {
+          for (let c = 0; c < piece.width; c++) {
+            const index = (row + r) * 8 + (col + c);
+            newCells[index] = isObstacle ? -piece.id : piece.id;
+          }
         }
-      }
 
       // 标记为已使用
       const newUsedPieces = [...prev.used_pieces];
