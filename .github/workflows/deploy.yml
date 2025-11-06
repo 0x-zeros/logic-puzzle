@@ -1,0 +1,70 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout代码
+        uses: actions/checkout@v4
+
+      - name: 安装Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: 缓存Cargo
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            logic_core/target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: 安装wasm-pack
+        run: cargo install wasm-pack --version 0.13.1
+
+      - name: 编译WASM
+        run: |
+          cd logic_core
+          wasm-pack build --target web --out-dir ../src/wasm --release
+
+      - name: 安装Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 安装npm依赖
+        run: npm ci
+
+      - name: 构建前端
+        run: npm run build
+
+      - name: 配置GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 上传Pages构建产物
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: 部署到GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
