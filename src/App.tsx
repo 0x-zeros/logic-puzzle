@@ -310,12 +310,31 @@ function App() {
                 margin: '20px 0',
               }}
             >
-              <Board
-                cells={gameState.board.cells}
-                pieces={gameState.pieces}
-                onCellClick={handleCellClick}
-                onCellRightClick={handleCellRightClick}
-              />
+              {/* 左侧：棋盘 + 状态提示 */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <Board
+                  cells={gameState.board.cells}
+                  pieces={gameState.pieces}
+                  onCellClick={handleCellClick}
+                  onCellRightClick={handleCellRightClick}
+                />
+                {/* 状态提示 */}
+                <div
+                  style={{
+                    padding: '12px 16px',
+                    background: '#f8f9fa',
+                    borderRadius: '8px',
+                    border: '1px solid #dee2e6',
+                    color: '#495057',
+                    fontSize: '14px',
+                    textAlign: 'center',
+                  }}
+                >
+                  {status}
+                </div>
+              </div>
+
+              {/* 右侧：方块列表 */}
               <PieceTray
                 pieces={gameState.pieces}
                 usedPieces={gameState.used_pieces}
@@ -334,29 +353,10 @@ function App() {
                 color: '#666',
               }}
             >
-              请点击"新关卡"开始游戏
+              点击"开始游戏"或"随机关卡"开始
             </div>
           )}
         </main>
-
-        {/* 状态栏 */}
-        <footer
-          style={{
-            marginTop: '20px',
-            paddingTop: '16px',
-            borderTop: '2px solid #eee',
-          }}
-        >
-          <div
-            style={{
-              textAlign: 'center',
-              color: '#666',
-              fontSize: '14px',
-            }}
-          >
-            {status}
-          </div>
-        </footer>
       </div>
     </div>
   );
