@@ -15,6 +15,10 @@
 
 </div>
 
+<img src="assets/images_md/ios.jpg" alt="ios截图" width="400"/>
+
+![](assets/images_md/image-2025-11-16T12-20-55-992Z.png)
+
 ## ✨ 特性
 
 - 🎮 **8×8 拼图棋盘** - 经典的逻辑拼图玩法
