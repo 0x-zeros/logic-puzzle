@@ -15,9 +15,10 @@
 
 </div>
 
-<img src="assets/images_md/ios.jpg" alt="ios截图" width="400"/>
-
-![](assets/images_md/image-2025-11-16T12-20-55-992Z.png)
+<div style="display: flex; gap: 10px; justify-content: center;">
+  <img src="assets/images_md/ios.jpg" alt="ios截图" width="250"/>
+  <img src="assets/images_md/image-2025-11-16T12-20-55-992Z.png" alt="游戏截图" width="250"/>
+</div>
 
 ## ✨ 特性
 
